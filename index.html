@@ -1400,7 +1400,7 @@
 
             if (response.ok) {
                 const data = await response.json();
-                const shortUrl = `${window.location.origin}/api/url/${data.shortCode}`;
+                const shortUrl = `$${API_BASE_URL}/api/url/${data.shortCode}`;
                 showResult(shortUrl);
                 showSuccess('URL shortened successfully!');
                 urlInput.value = '';
@@ -1540,7 +1540,7 @@
         urls.forEach(url => {
             const row = document.createElement('tr');
             const createdDate = new Date(url.createdAt).toLocaleDateString();
-            const shortUrl = `${window.location.origin}/api/url/${url.shortCode}`;
+            const shortUrl = `${API_BASE_URL}/api/url/${url.shortCode}`;
 
             row.innerHTML = `
                 <td>
@@ -1615,7 +1615,7 @@
         mobileList.innerHTML = '';
         urls.forEach(url => {
             const createdDate = new Date(url.createdAt).toLocaleDateString();
-            const shortUrl = `${window.location.origin}/api/url/${url.shortCode}`;
+            const shortUrl = `${API_BASE_URL}/api/url/${url.shortCode}`;
 
             const card = document.createElement('div');
             card.className = 'mobile-url-card';
