@@ -1,6 +1,4 @@
-.stat-icon {
-            width: 56px;
-            height<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1216,6 +1214,10 @@
         let showAnalytics = false;
 
         const API_BASE_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:8080/api/url'
+            : 'https://url-shortener-1-zlrh.onrender.com/api/url';
+
+        const SHORT_URL_BASE = window.location.hostname === 'localhost'
             ? 'http://localhost:8080/api/url'
             : 'https://url-shortener-1-zlrh.onrender.com/api/url';
 
