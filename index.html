@@ -1050,7 +1050,7 @@
                                 </div>
                             </div>
                             <div class="result-url-display">
-                                <div class="result-url-text" id="resultUrl"></div>
+                                <a href="#" id="resultUrlLink" target="_blank" class="result-url-text" style="text-decoration: none; color: #a5b4fc;"></a>
                             </div>
                             <div class="result-actions">
                                 <button class="btn btn-primary btn-copy" onclick="copyResult()">
@@ -1066,7 +1066,7 @@
                                         <polyline points="15,3 21,3 21,9"/>
                                         <line x1="10" y1="14" x2="21" y2="3"/>
                                     </svg>
-                                    Visit Link
+                                    Open Link
                                 </button>
                             </div>
                         </div>
@@ -1346,7 +1346,9 @@
 
         function showResult(shortUrl) {
             const resultContainer = document.getElementById('resultContainer');
-            document.getElementById('resultUrl').textContent = shortUrl;
+            const resultUrlLink = document.getElementById('resultUrlLink');
+            resultUrlLink.textContent = shortUrl;
+            resultUrlLink.href = shortUrl;
             resultContainer.classList.remove('hidden');
         }
 
@@ -1386,7 +1388,7 @@
             tableBody.innerHTML = '';
             urls.forEach(url => {
                 const createdDate = new Date(url.createdAt).toLocaleDateString();
-                const shortUrl = `${window.location.origin}/${url.shortCode}`;
+                const shortUrl = `${SHORT_URL_BASE}/${url.shortCode}`;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -1408,13 +1410,16 @@
                     <td>
                         <div class="code-badge">
                             ${url.shortCode}
-                            <button class="quick-action" onclick="copyToClipboard('${shortUrl}', this)">
+                            <button class="quick-action" onclick="copyToClipboard('${shortUrl}', this)" title="Copy">
                                 <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
                                 </svg>
                             </button>
                         </div>
+                        <a href="${shortUrl}" target="_blank" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none; display: block; margin-top: 0.25rem;">
+                            Click to open →
+                        </a>
                     </td>
                     <td>
                         <div class="clicks-badge">
@@ -1498,13 +1503,14 @@
         }
 
         function copyResult() {
-            const resultUrl = document.getElementById('resultUrl').textContent;
+            const resultUrlLink = document.getElementById('resultUrlLink');
+            const resultUrl = resultUrlLink.textContent;
             copyToClipboard(resultUrl);
         }
 
         function visitResult() {
-            const resultUrl = document.getElementById('resultUrl').textContent;
-            window.open(resultUrl, '_blank');
+            const resultUrlLink = document.getElementById('resultUrlLink');
+            window.open(resultUrlLink.href, '_blank');
         }
 
         function copyToClipboard(text, button = null) {
