@@ -1275,7 +1275,7 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    const shortUrl = `${window.location.origin}/${data.shortCode}`;
+                    const shortUrl = `${API_BASE_URL}/${data.shortCode}`;
                     showResult(shortUrl);
                     showSuccess('✨ URL shortened successfully!');
                     urlInput.value = '';
